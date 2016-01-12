@@ -1,6 +1,7 @@
 package org.usfirst.frc2813.LeftoverRover.subsystems;
 
 import org.usfirst.frc2813.LeftoverRover.IMU.IMU;
+import org.usfirst.frc2813.LeftoverRover.IMU.IMUAdvanced;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
@@ -9,7 +10,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Nav6 extends Subsystem {
-    IMU imu;
+	
+    public IMU imu;
+    public IMUAdvanced imuAdvanced;
+    
     public Nav6 () {
         SerialPort serial_port;
         try {
@@ -24,8 +28,8 @@ public class Nav6 extends Subsystem {
             // features.
 
             byte update_rate_hz = 100;
-            //imu = new IMU(serial_port,update_rate_hz);
-            imu = new IMU(serial_port,update_rate_hz);
+            imu = new IMU(serial_port, update_rate_hz);
+            imuAdvanced = new IMUAdvanced(serial_port, update_rate_hz);
             System.out.println("imu init");
         } catch( Exception ex ) {
             System.out.println("Serial Port Exception");
@@ -54,8 +58,7 @@ public class Nav6 extends Subsystem {
         }
 
     }
-    public void displayNav6Data (boolean display) {
-        if (display) {
+    public void displayNav6Data () {
             SmartDashboard.putNumber("IMU_Yaw", imu.getYaw());
             SmartDashboard.putNumber("PIDget", imu.pidGet());
             SmartDashboard.putBoolean("IMU_IsCalibrating", imu.isCalibrating());
@@ -64,13 +67,7 @@ public class Nav6 extends Subsystem {
             SmartDashboard.putNumber("IMU_CompassHeading", imu.getCompassHeading());
             SmartDashboard.putNumber("IMU_Update_Count", imu.getUpdateCount());
             SmartDashboard.putNumber("IMU_Byte_Count", imu.getByteCount());
-            /*  Can acess if using IMUAdvanced
-            //IMUAdvanced uses more CPU to process this data
-            SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
-            SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
-            SmartDashboard.putBoolean(  "IMU_IsMoving",         imu.isMoving());
-            SmartDashboard.putNumber(   "IMU_Temp_C",           imu.getTempC());
-            */
-        }
+            SmartDashboard.putNumber(   "IMU_Accel_X",          imuAdvanced.getWorldLinearAccelX());
+            SmartDashboard.putNumber(   "IMU_Accel_Y",          imuAdvanced.getWorldLinearAccelY());
     }
 }

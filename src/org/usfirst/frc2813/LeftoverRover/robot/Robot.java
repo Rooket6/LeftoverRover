@@ -97,12 +97,12 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-		nav6.displayNav6Data(true);
+		nav6.displayNav6Data();
 		Scheduler.getInstance().run();
 		if (Robot.oi.getJoystickOne().getRawButton(10)) {
 			Robot.nav6.resetNav6();
 		}
-	}
+    }
 
     /**
      * This function is called periodically during test mode

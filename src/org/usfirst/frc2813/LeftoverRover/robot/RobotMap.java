@@ -12,7 +12,6 @@
 package org.usfirst.frc2813.LeftoverRover.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -37,7 +36,6 @@ public class RobotMap {
     public static Relay leftRelay;
     public static Relay rightRelay;
     public static Compressor compressor;
-	public static DigitalOutput elevatorGet;
 
     public static void init() {
     	
